@@ -7,17 +7,22 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Event {
     @Id
-    @GeneratedValue(generator = "SEQ_ROLES")
+    @GeneratedValue(generator = "SEQ_EVENT")
     @GenericGenerator(
-            name = "SEQ_ROLES",
+            name = "SEQ_EVENT",
             strategy = "uuid2"
     )
     private String id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name="app_user_id", nullable = false)
+    private AppUser user;
+
 }
