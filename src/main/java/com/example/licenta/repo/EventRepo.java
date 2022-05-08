@@ -1,9 +1,9 @@
 package com.example.licenta.repo;
 
 import com.example.licenta.entity.AppUser;
+import com.example.licenta.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepo extends JpaRepository<AppUser, String> {
-    AppUser findByUsername(String username);
+public interface EventRepo extends JpaRepository<Event, String> {
 
 }
