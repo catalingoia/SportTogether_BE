@@ -1,6 +1,6 @@
 package com.example.licenta.DTOs;
 
-public class UserResponseDTO {
+public class AppUserResponseDTO {
 
     private String id;
     private String username;
