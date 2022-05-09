@@ -1,7 +1,10 @@
 package com.example.licenta.service;
 
+import com.example.licenta.DTOs.AppUserRequestDTO;
+import com.example.licenta.DTOs.AppUserResponseDTO;
 import com.example.licenta.entity.AppUser;
 import com.example.licenta.entity.Role;
+import com.example.licenta.mapper.UserMapper;
 import com.example.licenta.repo.RoleRepo;
 import com.example.licenta.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +29,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -44,9 +48,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public AppUser saveUser(AppUser user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
+    public AppUserResponseDTO saveUser(AppUserRequestDTO appUserRequestDTO) {
+        AppUser appUser = userMapper.appUserRequestDTOToAppUser(appUserRequestDTO);
+        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        return userMapper.appUserToAppUserResponseDTO(userRepo.save(appUser));
     }
 
     @Override
@@ -62,12 +67,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public AppUser getUser(String username) {
+    public AppUser getUser(String username)
+    {
         return userRepo.findByUsername(username);
     }
 
     @Override
-    public List<AppUser> getUsers() {
-        return userRepo.findAll();
+    public List<AppUserResponseDTO> getUsers()
+    {
+        return userMapper.appUserListToAppUserResponseDTOList(userRepo.findAll());
     }
 }

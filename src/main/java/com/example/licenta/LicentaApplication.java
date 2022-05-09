@@ -1,5 +1,6 @@
 package com.example.licenta;
 
+import com.example.licenta.DTOs.AppUserRequestDTO;
 import com.example.licenta.entity.AppUser;
 import com.example.licenta.entity.Role;
 import com.example.licenta.service.UserService;
@@ -30,8 +31,8 @@ public class LicentaApplication {
 			userService.saveRole(new Role(null, "USER"));
 			userService.saveRole(new Role(null, "ADMIN"));
 
-			userService.saveUser(new AppUser(null, "Goia Catalin", "goia", "1234", new ArrayList<>(),new ArrayList<>()));
-			userService.saveUser(new AppUser(null, "ALA BALA", "alabala", "1234", new ArrayList<>(), new ArrayList<>()));
+			userService.saveUser(new AppUserRequestDTO("Goia Catalin", "goia", "1234"));
+			userService.saveUser(new AppUserRequestDTO("ALA BALA", "alabala", "1234"));
 
 			userService.addRoleToUser("goia", "USER");
 			userService.addRoleToUser("goia", "ADMIN");
