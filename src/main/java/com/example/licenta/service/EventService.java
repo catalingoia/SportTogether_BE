@@ -7,11 +7,13 @@ import java.util.List;
 
 public interface EventService {
 
-    EventResponseDTO createEvent(EventRequestDTO eventRequestDTO, String userId);
+    EventResponseDTO createEvent(EventRequestDTO eventRequestDTO, String email);
 
     EventResponseDTO updateEvent(String eventId, EventRequestDTO eventRequestDTO);
 
     List<EventResponseDTO> getAllEvents();
+
+    List<EventResponseDTO> getEventsByAccepted(Boolean accepted);
 
     EventResponseDTO getEvent(String userId);
 

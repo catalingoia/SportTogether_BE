@@ -29,5 +29,6 @@ public class AppUser {
     private Collection<Role> roles = new ArrayList<>();
     @OneToMany(mappedBy = "user")
     private Collection<Event> events = new ArrayList<>();
-
+    @ManyToMany(mappedBy = "participants")
+    private Collection<Event>  attendingEvents = new ArrayList<>();
 }

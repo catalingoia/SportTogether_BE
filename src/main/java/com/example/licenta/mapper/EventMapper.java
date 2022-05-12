@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface EventMapper {
-    EventResponseDTO EventToEventResponseDTO(Event Event);
-    List<EventResponseDTO> EventListToEventResponseDTOList(List<Event> EventList);
-    Event EventRequestDTOToEvent(EventRequestDTO EventRequestDTO);
+    EventResponseDTO eventToEventResponseDTO(Event Event);
+    List<EventResponseDTO> eventListToEventResponseDTOList(List<Event> EventList);
+    Event eventRequestDTOToEvent(EventRequestDTO EventRequestDTO);
 }
