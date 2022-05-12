@@ -21,8 +21,9 @@ public class AppUser {
             strategy = "uuid2"
     )
     private String id;
-    private String name;
-    private String username;
+    private String firstName;
+    private String lastName;
+    private String email;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();

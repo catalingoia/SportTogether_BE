@@ -31,8 +31,8 @@ public class LicentaApplication {
 			userService.saveRole(new Role(null, "USER"));
 			userService.saveRole(new Role(null, "ADMIN"));
 
-			userService.saveUser(new AppUserRequestDTO("Goia Catalin", "goia", "1234"));
-			userService.saveUser(new AppUserRequestDTO("ALA BALA", "alabala", "1234"));
+			userService.saveUser(new AppUserRequestDTO("Goia", "Catalin", "1234", "goia"));
+			userService.saveUser(new AppUserRequestDTO("ALA","BALA", "1234", "alabala"));
 
 			userService.addRoleToUser("goia", "USER");
 			userService.addRoleToUser("goia", "ADMIN");

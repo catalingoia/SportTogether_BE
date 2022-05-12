@@ -10,8 +10,8 @@ import java.util.List;
 public interface UserService {
     AppUserResponseDTO saveUser(AppUserRequestDTO user);
     Role saveRole(Role role);
-    void addRoleToUser(String username, String roleName);
-    AppUser getUser(String username);
+    void addRoleToUser(String email, String roleName);
+    AppUser getUser(String email);
     List<AppUserResponseDTO> getUsers();
 
 }

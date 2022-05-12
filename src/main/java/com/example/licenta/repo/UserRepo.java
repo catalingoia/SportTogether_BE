@@ -4,6 +4,6 @@ import com.example.licenta.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepo extends JpaRepository<AppUser, String> {
-    AppUser findByUsername(String username);
+    AppUser findByEmail(String email);
 
 }

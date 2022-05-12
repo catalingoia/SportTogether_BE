@@ -32,19 +32,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserMapper userMapper;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AppUser user = userRepo.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        AppUser user = userRepo.findByEmail(email);
         if(user == null) {
             log.error("User not found");
             throw new UsernameNotFoundException("User not found");
         } else {
-            log.info("User found in database {}", username);
+            log.info("User found in database {}", email);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
             authorities.add( new SimpleGrantedAuthority(role.getName()));
         });
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 
     @Override
@@ -60,16 +60,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void addRoleToUser(String username, String roleName) {
-        AppUser user = userRepo.findByUsername(username);
+    public void addRoleToUser(String email, String roleName) {
+        AppUser user = userRepo.findByEmail(email);
         Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
     }
 
     @Override
-    public AppUser getUser(String username)
+    public AppUser getUser(String email)
     {
-        return userRepo.findByUsername(username);
+        return userRepo.findByEmail(email);
     }
 
     @Override

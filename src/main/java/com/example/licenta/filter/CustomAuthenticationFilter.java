@@ -37,18 +37,18 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String username, password;
+        String email, password;
 
         try {
             Map<String, String> requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
-            username = requestMap.get("username");
+            email = requestMap.get("email");
             password = requestMap.get("password");
         } catch (IOException e) {
             throw new AuthenticationServiceException(e.getMessage(), e);
         }
 
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-                username, password);
+                email, password);
 
         return this.getAuthenticationManager().authenticate(authRequest);
     }

@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface EventService {
 
-    EventResponseDTO createStory(EventRequestDTO eventRequestDTO, String userId);
+    EventResponseDTO createEvent(EventRequestDTO eventRequestDTO, String userId);
 
-    EventResponseDTO updateStory(String eventId, EventRequestDTO eventRequestDTO);
+    EventResponseDTO updateEvent(String eventId, EventRequestDTO eventRequestDTO);
 
-    List<EventResponseDTO> getAllStories();
+    List<EventResponseDTO> getAllEvents();
 
-    EventResponseDTO getStory(String userId);
+    EventResponseDTO getEvent(String userId);
 
-    void deleteStory(String userId);
+    void deleteEvent(String userId);
 
 }
