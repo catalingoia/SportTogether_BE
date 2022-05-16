@@ -15,11 +15,16 @@ public class EventResponseDTO {
     private String id;
     private String sport;
     private String level;
-    private Float price;
+    private String location;
+    private Double price;
     private Integer maxPlayers;
     private Collection<AppUser> participants;
     private Date createTimestamp;
     private Date updateTimestamp;
     private String email;
+    private String firstName;
+    private String lastName;
+    private Boolean accepted;
+    private Boolean rejected;
 }
 

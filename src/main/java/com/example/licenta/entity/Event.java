@@ -29,9 +29,10 @@ public class Event {
     private String sport;
     private String level;
     private String location;
-    private Float price;
+    private Double price;
     private Integer maxPlayers;
     private Boolean accepted = false;
+    private Boolean rejected = false;
     @ManyToMany
     @JoinTable(
             name = "participant",
@@ -50,5 +51,7 @@ public class Event {
     @JsonIgnore
     private AppUser user;
     private String email;
+    private String firstName;
+    private String lastName;
 
 }

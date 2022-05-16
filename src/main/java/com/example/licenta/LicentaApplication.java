@@ -1,8 +1,10 @@
 package com.example.licenta;
 
 import com.example.licenta.DTOs.AppUserRequestDTO;
+import com.example.licenta.DTOs.EventRequestDTO;
 import com.example.licenta.entity.AppUser;
 import com.example.licenta.entity.Role;
+import com.example.licenta.service.EventService;
 import com.example.licenta.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +28,7 @@ public class LicentaApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(UserService userService){
+	CommandLineRunner run(UserService userService, EventService eventService){
 		return args -> {
 			userService.saveRole(new Role(null, "USER"));
 			userService.saveRole(new Role(null, "ADMIN"));
@@ -37,6 +39,15 @@ public class LicentaApplication {
 			userService.addRoleToUser("goia", "USER");
 			userService.addRoleToUser("goia", "ADMIN");
 			userService.addRoleToUser("alabala", "USER");
+
+			eventService.createEvent(new EventRequestDTO("Fotbal", "amator", "cluj arena", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("Baschet", "profesionist", "gheorgheni", 12.00, 5), "alabala");
+			eventService.createEvent(new EventRequestDTO("Ping pong", "amator", "baza unirea", 32.00, 2), "alabala");
+			eventService.createEvent(new EventRequestDTO("Baschet", "profesionist", "cluj arena", 0.00, 21), "goia");
+			eventService.createEvent(new EventRequestDTO("Tenis", "amator", "acasa la mine", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("Volei", "amator", "cluj arena", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("Volei", "amator", "cluj arena", 12.00, 11), "goia");
+
 
 		};
 	}

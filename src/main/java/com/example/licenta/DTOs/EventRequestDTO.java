@@ -16,6 +16,6 @@ public class EventRequestDTO {
     private String sport;
     private String level;
     private String location;
-    private Float price;
+    private Double price;
     private Integer maxPlayers;
 }

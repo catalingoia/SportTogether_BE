@@ -13,9 +13,17 @@ public interface EventService {
 
     List<EventResponseDTO> getAllEvents();
 
+    List<EventResponseDTO> getEventsByApproved(Boolean approved);
+
+
     List<EventResponseDTO> getEventsByAccepted(Boolean accepted);
 
+    List<EventResponseDTO> getEventsByRejected(Boolean rejected);
+
+
     EventResponseDTO getEvent(String userId);
+
+    void acceptEvent(Boolean accepted, String eventId);
 
     void deleteEvent(String userId);
 
