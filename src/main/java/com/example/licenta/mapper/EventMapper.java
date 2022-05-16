@@ -4,6 +4,7 @@ import com.example.licenta.DTOs.EventRequestDTO;
 import com.example.licenta.DTOs.EventResponseDTO;
 import com.example.licenta.entity.Event;
 import org.mapstruct.Mapper;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 

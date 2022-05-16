@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         AppUser user = userRepo.findByEmail(email);
-        if(user == null) {
+        if (user == null) {
             log.error("User not found");
             throw new UsernameNotFoundException("User not found");
         } else {
@@ -42,16 +42,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
-            authorities.add( new SimpleGrantedAuthority(role.getName()));
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
         });
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 
     @Override
     public AppUserResponseDTO saveUser(AppUserRequestDTO appUserRequestDTO) {
-        AppUser appUser = userMapper.appUserRequestDTOToAppUser(appUserRequestDTO);
-        appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
-        return userMapper.appUserToAppUserResponseDTO(userRepo.save(appUser));
+        if (userRepo.findByEmail(appUserRequestDTO.getEmail()) == null) {
+            AppUser appUser = userMapper.appUserRequestDTOToAppUser(appUserRequestDTO);
+            appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+            return userMapper.appUserToAppUserResponseDTO(userRepo.save(appUser));
+        } else throw new RuntimeException();
     }
 
     @Override
@@ -67,14 +69,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public AppUser getUser(String email)
-    {
+    public AppUser getUser(String email) {
         return userRepo.findByEmail(email);
     }
 
     @Override
-    public List<AppUserResponseDTO> getUsers()
-    {
+    public List<AppUserResponseDTO> getUsers() {
         return userMapper.appUserListToAppUserResponseDTOList(userRepo.findAll());
     }
 }

@@ -2,8 +2,11 @@ package com.example.licenta.service;
 
 import com.example.licenta.DTOs.EventRequestDTO;
 import com.example.licenta.DTOs.EventResponseDTO;
+import com.example.licenta.entity.Event;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EventService {
 
@@ -11,20 +14,20 @@ public interface EventService {
 
     EventResponseDTO updateEvent(String eventId, EventRequestDTO eventRequestDTO);
 
-    List<EventResponseDTO> getAllEvents();
+    Map<String, Object> getAllEvents(Integer pageNo, Integer pageSize);
 
-    List<EventResponseDTO> getEventsByApproved(Boolean approved);
+    Map<String, Object> getUnapprovedEvents(Integer pageNo, Integer pageSize);
 
-
-    List<EventResponseDTO> getEventsByAccepted(Boolean accepted);
+    Map<String, Object> getAcceptedEvents(Integer pageNo, Integer pageSize);
 
     List<EventResponseDTO> getEventsByRejected(Boolean rejected);
 
-
-    EventResponseDTO getEvent(String userId);
+    EventResponseDTO getEvent(String eventId);
 
     void acceptEvent(Boolean accepted, String eventId);
 
-    void deleteEvent(String userId);
+    void deleteEvent(String eventId);
+
+    void joinEvent(String eventId, String email);
 
 }

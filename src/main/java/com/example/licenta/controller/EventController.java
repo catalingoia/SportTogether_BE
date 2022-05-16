@@ -13,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
@@ -22,21 +23,25 @@ public class EventController {
     private final EventService eventService;
 
     @GetMapping("/events")
-    public ResponseEntity<List<EventResponseDTO>> getAllEvents(){
-        return ResponseEntity.ok().body(eventService.getAllEvents());
+    public ResponseEntity<Map<String, Object>> getAllEvents(@RequestParam(value = "page") int page,
+                                                               @RequestParam(value = "size") int size)
+    {
+        return ResponseEntity.ok().body(eventService.getAllEvents(page, size));
     }
-
 
     @GetMapping("/events/unapproved")
-    public ResponseEntity<List<EventResponseDTO>> getEventByUnapproved(){
-        return ResponseEntity.ok().body(eventService.getEventsByApproved(false));
+    public ResponseEntity<Map<String, Object>> getUnapprovedEvents(@RequestParam(value = "page") int page,
+                                                                   @RequestParam(value = "size") int size)
+    {
+        return ResponseEntity.ok().body(eventService.getUnapprovedEvents(page, size));
     }
-
 
     @GetMapping("/events/accepted")
-    public ResponseEntity<List<EventResponseDTO>> getEventsByAccepted(){
-        return ResponseEntity.ok().body(eventService.getEventsByAccepted(true));
+    public ResponseEntity<Map<String, Object>> getAcceptedEvents(@RequestParam(value = "page") int page,
+                                                                 @RequestParam(value = "size") int size){
+        return ResponseEntity.ok().body(eventService.getAcceptedEvents(page,size));
     }
+
 
     @GetMapping("/events/rejected")
     public ResponseEntity<List<EventResponseDTO>> getEventsByRejected(){
@@ -55,8 +60,12 @@ public class EventController {
                                         @PathVariable(value = "eventId") String eventId){
         eventService.acceptEvent(approved, eventId);
         return ResponseEntity.ok().build();
+    }
 
-
+    @DeleteMapping("/event/delete/{eventId}")
+    public ResponseEntity<Void>deleteEvent(@PathVariable(value = "eventId") String eventId){
+        eventService.deleteEvent( eventId);
+        return ResponseEntity.ok().build();
     }
 
 

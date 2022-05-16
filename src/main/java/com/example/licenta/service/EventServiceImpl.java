@@ -9,11 +9,17 @@ import com.example.licenta.repo.EventRepo;
 import com.example.licenta.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -41,18 +47,41 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public List<EventResponseDTO> getAllEvents() {
-        return eventMapper.eventListToEventResponseDTOList(eventRepo.findAll());
+    public Map<String, Object> getAllEvents(Integer pageNo, Integer pageSize) {
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Map<String, Object> response = new HashMap<>();
+        Page<Event> events = eventRepo.findByAcceptedTrueOrRejectedTrue(paging);
+        response.put("events",  eventMapper.eventListToEventResponseDTOList(events.getContent()));
+        response.put("currentPage", events.getNumber());
+        response.put("totalItems", events.getTotalElements());
+        response.put("totalPages", events.getTotalPages());
+
+        return response;
+    }
+    @Override
+    public Map<String, Object> getUnapprovedEvents(Integer pageNo, Integer pageSize) {
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Map<String, Object> response = new HashMap<>();
+        Page<Event> events = eventRepo.findByAcceptedFalseAndRejectedFalse(paging);
+        response.put("events",  eventMapper.eventListToEventResponseDTOList(events.getContent()));
+        response.put("currentPage", events.getNumber());
+        response.put("totalItems", events.getTotalElements());
+        response.put("totalPages", events.getTotalPages());
+
+        return response;
     }
 
     @Override
-    public List<EventResponseDTO> getEventsByApproved(Boolean approved) {
-        return eventMapper.eventListToEventResponseDTOList(eventRepo.findByAcceptedIsAndRejectedIs(approved, approved));
-    }
+    public Map<String, Object> getAcceptedEvents(Integer pageNo, Integer pageSize) {
+        Pageable paging = PageRequest.of(pageNo, pageSize);
+        Map<String, Object> response = new HashMap<>();
+        Page<Event> events = eventRepo.findByAcceptedTrue(paging);
+        response.put("events",  eventMapper.eventListToEventResponseDTOList(events.getContent()));
+        response.put("currentPage", events.getNumber());
+        response.put("totalItems", events.getTotalElements());
+        response.put("totalPages", events.getTotalPages());
 
-    @Override
-    public List<EventResponseDTO> getEventsByAccepted(Boolean accepted) {
-        return eventMapper.eventListToEventResponseDTOList(eventRepo.findByAcceptedIs(accepted));
+        return response;
     }
 
     @Override
@@ -70,15 +99,21 @@ public class EventServiceImpl implements EventService{
         Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
         if(approved) {
             event.setAccepted(true);
-            System.out.println(event.getAccepted());
-        }else
+            event.setRejected(false);
+        }else {
             event.setRejected(true);
-            System.out.println(event.getRejected());
-
+            event.setAccepted(false);
+        }
     }
 
     @Override
-    public void deleteEvent(String userId) {
+    public void deleteEvent(String eventId) {
+        Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
+        eventRepo.delete(event);
+    }
+
+    @Override
+    public void joinEvent(String eventId, String email) {
 
     }
 

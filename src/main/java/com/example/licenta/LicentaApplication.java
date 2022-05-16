@@ -34,19 +34,22 @@ public class LicentaApplication {
 			userService.saveRole(new Role(null, "ADMIN"));
 
 			userService.saveUser(new AppUserRequestDTO("Goia", "Catalin", "1234", "goia"));
+			userService.saveUser(new AppUserRequestDTO("Dar", "Da", "1234", "dada@yahoo.com"));
+
 			userService.saveUser(new AppUserRequestDTO("ALA","BALA", "1234", "alabala"));
 
 			userService.addRoleToUser("goia", "USER");
 			userService.addRoleToUser("goia", "ADMIN");
 			userService.addRoleToUser("alabala", "USER");
 
-			eventService.createEvent(new EventRequestDTO("Fotbal", "amator", "cluj arena", 12.00, 11), "goia");
-			eventService.createEvent(new EventRequestDTO("Baschet", "profesionist", "gheorgheni", 12.00, 5), "alabala");
-			eventService.createEvent(new EventRequestDTO("Ping pong", "amator", "baza unirea", 32.00, 2), "alabala");
-			eventService.createEvent(new EventRequestDTO("Baschet", "profesionist", "cluj arena", 0.00, 21), "goia");
-			eventService.createEvent(new EventRequestDTO("Tenis", "amator", "acasa la mine", 12.00, 11), "goia");
-			eventService.createEvent(new EventRequestDTO("Volei", "amator", "cluj arena", 12.00, 11), "goia");
-			eventService.createEvent(new EventRequestDTO("Volei", "amator", "cluj arena", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("AAA", "amator", "cluj arena", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("BBB", "profesionist", "gheorgheni", 12.00, 5), "alabala");
+			eventService.createEvent(new EventRequestDTO("CCC", "amator", "baza unirea", 32.00, 2), "alabala");
+			eventService.createEvent(new EventRequestDTO("DDD", "profesionist", "cluj arena", 0.00, 21), "goia");
+			eventService.createEvent(new EventRequestDTO("EEEE", "amator", "acasa la mine", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("FFF", "amator", "cluj arena", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("GGG", "amator", "cluj arena", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("HHH", "amator", "cluj arena", 12.00, 11), "goia");
 
 
 		};
