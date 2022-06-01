@@ -2,7 +2,6 @@ package com.example.licenta;
 
 import com.example.licenta.DTOs.AppUserRequestDTO;
 import com.example.licenta.DTOs.EventRequestDTO;
-import com.example.licenta.entity.AppUser;
 import com.example.licenta.entity.Role;
 import com.example.licenta.service.EventService;
 import com.example.licenta.service.UserService;
@@ -41,15 +40,24 @@ public class LicentaApplication {
 			userService.addRoleToUser("goia", "USER");
 			userService.addRoleToUser("goia", "ADMIN");
 			userService.addRoleToUser("alabala", "USER");
+			userService.addRoleToUser("dada@yahoo.com", "USER");
 
-			eventService.createEvent(new EventRequestDTO("AAA", "amator", "cluj arena", 12.00, 11), "goia");
-			eventService.createEvent(new EventRequestDTO("BBB", "profesionist", "gheorgheni", 12.00, 5), "alabala");
-			eventService.createEvent(new EventRequestDTO("CCC", "amator", "baza unirea", 32.00, 2), "alabala");
-			eventService.createEvent(new EventRequestDTO("DDD", "profesionist", "cluj arena", 0.00, 21), "goia");
-			eventService.createEvent(new EventRequestDTO("EEEE", "amator", "acasa la mine", 12.00, 11), "goia");
-			eventService.createEvent(new EventRequestDTO("FFF", "amator", "cluj arena", 12.00, 11), "goia");
-			eventService.createEvent(new EventRequestDTO("GGG", "amator", "cluj arena", 12.00, 11), "goia");
-			eventService.createEvent(new EventRequestDTO("HHH", "amator", "cluj arena", 12.00, 11), "goia");
+			eventService.createEvent(new EventRequestDTO("AAA", "amator", "0743533431","cata@yahoo.com", 12, 11,
+			"Va astept in numar cat mai mare aici","May 21 2000","12:00 AM","Cluj arena"), "goia");
+			eventService.createEvent(new EventRequestDTO("BBB", "amator", "0743533431","cata@yahoo.com", 12, 11,
+					"Va astept in numar cat mai mare aici","May 21 2000","12:00 AM","Cluj arena"), "goia");
+			eventService.createEvent(new EventRequestDTO("CCC", "amator", "0743533431","cata@yahoo.com", 12, 11,
+					"Va astept in numar cat mai mare aici","May 21 2000","12:00 AM","Cluj arena"), "goia");
+			eventService.createEvent(new EventRequestDTO("DDD", "amator", "0743533431","cata@yahoo.com", 12, 11,
+					"Va astept in numar cat mai mare aici","May 21 2000","12:00 AM","Cluj arena"), "goia");
+			eventService.createEvent(new EventRequestDTO("EEE", "amator", "0743533431","cata@yahoo.com", 12, 11,
+					"Va astept in numar cat mai mare aici","May 21 2000","12:00 AM","Cluj arena"), "goia");
+			eventService.createEvent(new EventRequestDTO("FFF", "amator", "0743533431","cata@yahoo.com", 12, 11,
+					"Va astept in numar cat mai mare aici","May 21 2000","12:00 AM","Cluj arena"), "goia");
+			eventService.createEvent(new EventRequestDTO("GGG", "amator", "0743533431","cata@yahoo.com", 12, 11,
+					"Va astept in numar cat mai mare aici","May 21 2000","12:00 AM","Cluj arena"), "goia");
+			eventService.createEvent(new EventRequestDTO("HHH", "amator", "0743533431","cata@yahoo.com", 12, 11,
+					"Va astept in numar cat mai mare aici","May 21 2000","12:00 AM","Cluj arena"), "goia");
 
 
 		};

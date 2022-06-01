@@ -1,13 +1,13 @@
 package com.example.licenta.controller;
 
-import com.example.licenta.DTOs.AppUserRequestDTO;
-import com.example.licenta.DTOs.AppUserResponseDTO;
+
 import com.example.licenta.DTOs.EventRequestDTO;
 import com.example.licenta.DTOs.EventResponseDTO;
 import com.example.licenta.service.EventService;
-import com.example.licenta.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -43,26 +43,52 @@ public class EventController {
     }
 
 
-    @GetMapping("/events/rejected")
-    public ResponseEntity<List<EventResponseDTO>> getEventsByRejected(){
-        return ResponseEntity.ok().body(eventService.getEventsByRejected(true));
+    @GetMapping("/events/user/pending")
+    public ResponseEntity<List<EventResponseDTO>> getPendingEventsByEmail(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok().body(eventService.getPendingEventsByEmail(auth.getName()));
     }
 
-    @PostMapping("/event/save/{email}")
-    public ResponseEntity<EventResponseDTO>createEvent(@RequestBody EventRequestDTO event,
-                                                    @PathVariable(value = "email") String email){
+    @GetMapping("/events/user/accepted")
+    public ResponseEntity<List<EventResponseDTO>> getAcceptedEventsByEmail(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok().body(eventService.getAcceptedEventsByEmail(auth.getName()));
+    }
+
+    @GetMapping("/events/user/rejected")
+    public ResponseEntity<List<EventResponseDTO>> getRejectedEventsByEmail(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok().body(eventService.getRejectedEventsByEmail(auth.getName()));
+    }
+    @PostMapping("/events/create")
+    public ResponseEntity<EventResponseDTO>createEvent(@RequestBody EventRequestDTO event){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/event/save").toUriString());
-        return ResponseEntity.created(uri).body(eventService.createEvent(event, email));
+        return ResponseEntity.created(uri).body(eventService.createEvent(event, auth.getName()));
     }
 
-    @PostMapping("/admin/accept/{eventId}")
+    @PostMapping("/events/accept/{eventId}")
     public ResponseEntity<?>acceptEvent(@RequestBody Boolean approved,
                                         @PathVariable(value = "eventId") String eventId){
         eventService.acceptEvent(approved, eventId);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/event/delete/{eventId}")
+    @PostMapping("/events/join/{eventId}")
+    public ResponseEntity<Void>joinEvent(@RequestBody String email,
+                                        @PathVariable(value = "eventId") String eventId){
+        eventService.joinEvent(eventId, email);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/events/leave/{eventId}")
+    public ResponseEntity<Void>leaveEvent(@RequestBody String email,
+                                         @PathVariable(value = "eventId") String eventId){
+        eventService.leaveEvent(eventId, email);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/events/delete/{eventId}")
     public ResponseEntity<Void>deleteEvent(@PathVariable(value = "eventId") String eventId){
         eventService.deleteEvent( eventId);
         return ResponseEntity.ok().build();

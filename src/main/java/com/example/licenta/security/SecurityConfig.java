@@ -50,8 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 mupaf,
                 UsernamePasswordAuthenticationFilter.class);
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/login").permitAll();
-        http.authorizeRequests()
-                .antMatchers("/swagger-ui/**", "/licenta-openapi/**").permitAll();
+        http.authorizeRequests().antMatchers("/swagger-ui/**", "/licenta-openapi/**").permitAll();
         http.authorizeRequests().antMatchers("/api/login/**", "/api/register/**","/api/role/addtouser/**"
                 ,"/api/token/refresh/**").permitAll();
         http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("USER");

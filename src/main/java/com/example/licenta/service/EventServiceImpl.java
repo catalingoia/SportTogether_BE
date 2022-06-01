@@ -16,10 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -85,8 +82,18 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public List<EventResponseDTO> getEventsByRejected(Boolean rejected) {
-        return eventMapper.eventListToEventResponseDTOList(eventRepo.findByRejectedIs(rejected));
+    public List<EventResponseDTO> getPendingEventsByEmail(String email) {
+        return eventMapper.eventListToEventResponseDTOList(eventRepo.findByUserEmailAndAcceptedFalseAndRejectedFalse(email));
+    }
+
+    @Override
+    public List<EventResponseDTO> getAcceptedEventsByEmail(String email) {
+        return eventMapper.eventListToEventResponseDTOList(eventRepo.findByUserEmailAndAcceptedTrue(email));
+    }
+
+    @Override
+    public List<EventResponseDTO> getRejectedEventsByEmail(String email) {
+        return eventMapper.eventListToEventResponseDTOList(eventRepo.findByUserEmailAndRejectedTrue(email));
     }
 
     @Override
@@ -107,14 +114,39 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public void deleteEvent(String eventId) {
+    public void leaveEvent(String eventId, String email) {
         Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
-        eventRepo.delete(event);
+        AppUser user = userRepo.findByEmail(email);
+        System.out.println(user);
+        event.getParticipants().remove(user);
+        Collection<AppUser> currentParticipants = event.getParticipants();
+         if(!currentParticipants.contains(user)) {
+            currentParticipants.remove(user);
+        } else throw new RuntimeException("User is not a participant");
+        event.setParticipants(currentParticipants);
+        eventRepo.save(event);
+
     }
 
     @Override
     public void joinEvent(String eventId, String email) {
+        Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
+        AppUser user = userRepo.findByEmail(email);
+        Collection<AppUser> currentParticipants = event.getParticipants();
+        if(currentParticipants.size() == event.getMaxPlayers())
+            throw new RuntimeException("Event is full");
+        if(!currentParticipants.contains(user)) {
+            currentParticipants.add(user);
+        } else throw new RuntimeException("User is already a participant");
 
+        event.setParticipants(currentParticipants);
+        eventRepo.save(event);
+    }
+
+    @Override
+    public void deleteEvent(String eventId) {
+        Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
+        eventRepo.delete(event);
     }
 
 

@@ -1,8 +1,10 @@
 package com.example.licenta.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,8 +13,11 @@ import java.util.Collection;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = { "events"}) // This,
+@ToString(exclude = { "events"}) // and this
 public class AppUser {
     @Id
     @GeneratedValue(generator = "SEQ_APPUSER")
@@ -30,5 +35,6 @@ public class AppUser {
     @OneToMany(mappedBy = "user")
     private Collection<Event> events = new ArrayList<>();
     @ManyToMany(mappedBy = "participants")
+    @JsonManagedReference
     private Collection<Event>  attendingEvents = new ArrayList<>();
 }

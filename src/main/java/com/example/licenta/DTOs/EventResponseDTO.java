@@ -16,7 +16,7 @@ public class EventResponseDTO {
     private String sport;
     private String level;
     private String location;
-    private Double price;
+    private Integer price;
     private Integer maxPlayers;
     private Collection<AppUser> participants;
     private Date createTimestamp;
@@ -26,5 +26,8 @@ public class EventResponseDTO {
     private String lastName;
     private Boolean accepted;
     private Boolean rejected;
+    private String description;
+    private String contactEmail;
+    private String contactPhone;
 }
 

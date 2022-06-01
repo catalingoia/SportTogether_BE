@@ -1,9 +1,7 @@
 package com.example.licenta.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,8 +14,11 @@ import java.util.Date;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = { "user", "participants"}) // This,
+@ToString(exclude = { "user", "participants"}) // and this
 public class Event {
     @Id
     @GeneratedValue(generator = "SEQ_EVENT")
@@ -28,9 +29,14 @@ public class Event {
     private String id;
     private String sport;
     private String level;
-    private String location;
-    private Double price;
+    private String contactEmail;
+    private String contactPhone;
     private Integer maxPlayers;
+    private Integer price;
+    private String description;
+    private String date;
+    private String time;
+    private String location;
     private Boolean accepted = false;
     private Boolean rejected = false;
     @ManyToMany
@@ -39,6 +45,7 @@ public class Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "app_user_id")
     )
+    @JsonBackReference
     private Collection<AppUser> participants = new ArrayList<>();
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,5 +60,6 @@ public class Event {
     private String email;
     private String firstName;
     private String lastName;
+
 
 }
