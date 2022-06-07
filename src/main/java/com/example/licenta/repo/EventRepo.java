@@ -1,7 +1,6 @@
 package com.example.licenta.repo;
 
-import com.example.licenta.entity.AppUser;
-import com.example.licenta.entity.Event;
+import com.example.licenta.model.Event;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

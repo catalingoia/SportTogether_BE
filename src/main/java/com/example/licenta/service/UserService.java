@@ -2,8 +2,8 @@ package com.example.licenta.service;
 
 import com.example.licenta.DTOs.AppUserRequestDTO;
 import com.example.licenta.DTOs.AppUserResponseDTO;
-import com.example.licenta.entity.AppUser;
-import com.example.licenta.entity.Role;
+import com.example.licenta.model.AppUser;
+import com.example.licenta.model.Role;
 
 import java.util.List;
 

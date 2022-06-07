@@ -13,4 +13,5 @@ public class AppUserRequestDTO {
     private String lastName;
     private String password;
     private String email;
+    private String phone;
 }

@@ -1,4 +1,4 @@
-package com.example.licenta.entity;
+package com.example.licenta.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
@@ -14,7 +14,6 @@ import java.util.Date;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "user", "participants"}) // This,

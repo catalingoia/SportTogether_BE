@@ -2,7 +2,7 @@ package com.example.licenta.mapper;
 
 import com.example.licenta.DTOs.AppUserRequestDTO;
 import com.example.licenta.DTOs.AppUserResponseDTO;
-import com.example.licenta.entity.AppUser;
+import com.example.licenta.model.AppUser;
 import org.mapstruct.Mapper;
 
 

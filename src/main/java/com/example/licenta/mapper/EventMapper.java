@@ -2,9 +2,8 @@ package com.example.licenta.mapper;
 
 import com.example.licenta.DTOs.EventRequestDTO;
 import com.example.licenta.DTOs.EventResponseDTO;
-import com.example.licenta.entity.Event;
+import com.example.licenta.model.Event;
 import org.mapstruct.Mapper;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 

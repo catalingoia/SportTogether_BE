@@ -1,6 +1,6 @@
 package com.example.licenta.DTOs;
 
-import com.example.licenta.entity.AppUser;
+import com.example.licenta.model.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +18,8 @@ public class EventResponseDTO {
     private String location;
     private Integer price;
     private Integer maxPlayers;
+    private String time;
+    private String date;
     private Collection<AppUser> participants;
     private Date createTimestamp;
     private Date updateTimestamp;

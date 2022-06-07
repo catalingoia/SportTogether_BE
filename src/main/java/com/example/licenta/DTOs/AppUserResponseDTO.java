@@ -1,7 +1,6 @@
 package com.example.licenta.DTOs;
 
-import com.example.licenta.entity.Event;
-import com.example.licenta.entity.Role;
+import com.example.licenta.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +16,7 @@ public class AppUserResponseDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private String phone;
     private Collection<Role> roles;
     private Collection<EventResponseDTO> events;
     private Collection<EventResponseDTO> attendingEvents;

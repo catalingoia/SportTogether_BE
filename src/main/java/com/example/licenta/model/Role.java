@@ -1,4 +1,4 @@
-package com.example.licenta.entity;
+package com.example.licenta.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

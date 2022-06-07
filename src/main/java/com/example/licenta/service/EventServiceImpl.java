@@ -2,8 +2,8 @@ package com.example.licenta.service;
 
 import com.example.licenta.DTOs.EventRequestDTO;
 import com.example.licenta.DTOs.EventResponseDTO;
-import com.example.licenta.entity.AppUser;
-import com.example.licenta.entity.Event;
+import com.example.licenta.model.AppUser;
+import com.example.licenta.model.Event;
 import com.example.licenta.mapper.EventMapper;
 import com.example.licenta.repo.EventRepo;
 import com.example.licenta.repo.UserRepo;
@@ -131,15 +131,20 @@ public class EventServiceImpl implements EventService{
     @Override
     public void joinEvent(String eventId, String email) {
         Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
+        System.out.println("1111" + event);
         AppUser user = userRepo.findByEmail(email);
+        System.out.println("2222" + user);
         Collection<AppUser> currentParticipants = event.getParticipants();
+        System.out.println("3333" + currentParticipants);
+
         if(currentParticipants.size() == event.getMaxPlayers())
             throw new RuntimeException("Event is full");
         if(!currentParticipants.contains(user)) {
             currentParticipants.add(user);
         } else throw new RuntimeException("User is already a participant");
-
+        System.out.println("55555" + currentParticipants);
         event.setParticipants(currentParticipants);
+        System.out.println("6666" + event);
         eventRepo.save(event);
     }
 

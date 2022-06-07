@@ -1,9 +1,6 @@
-package com.example.licenta.entity;
+package com.example.licenta.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -13,7 +10,6 @@ import java.util.Collection;
 
 @Entity
 @Data
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = { "events"}) // This,
@@ -30,6 +26,7 @@ public class AppUser {
     private String lastName;
     private String email;
     private String password;
+    private String phone;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
     @OneToMany(mappedBy = "user")
