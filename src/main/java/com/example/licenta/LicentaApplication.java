@@ -64,8 +64,6 @@ public class LicentaApplication {
 			eventService.createEvent(new EventRequestDTO("Bowling", "First time", "0743533431","dragomir@gmail.com", 1, 20,
 					"Am nevoie de cineva care sa ma invete bowling. Suna-ma pentru mai multe detalii","Jun 28 2022","5:00 pM","Multiplex Leul"), "dragomir@gmail.com");
 
-
-
 		};
 	}
 

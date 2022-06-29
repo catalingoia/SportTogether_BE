@@ -39,11 +39,6 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public EventResponseDTO updateEvent(String eventId, EventRequestDTO eventRequestDTO) {
-        return null;
-    }
-
-    @Override
     public Map<String, Object> getAllEvents(Integer pageNo, Integer pageSize) {
         Pageable paging = PageRequest.of(pageNo, pageSize);
         Map<String, Object> response = new HashMap<>();
@@ -97,11 +92,6 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public EventResponseDTO getEvent(String userId) {
-        return null;
-    }
-
-    @Override
     public void acceptEvent(Boolean approved, String eventId) {
         Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
         if(approved) {
@@ -131,20 +121,14 @@ public class EventServiceImpl implements EventService{
     @Override
     public void joinEvent(String eventId, String email) {
         Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
-        System.out.println("1111" + event);
         AppUser user = userRepo.findByEmail(email);
-        System.out.println("2222" + user);
         Collection<AppUser> currentParticipants = event.getParticipants();
-        System.out.println("3333" + currentParticipants);
-
         if(currentParticipants.size() == event.getMaxPlayers())
             throw new RuntimeException("Event is full");
         if(!currentParticipants.contains(user)) {
             currentParticipants.add(user);
         } else throw new RuntimeException("User is already a participant");
-        System.out.println("55555" + currentParticipants);
         event.setParticipants(currentParticipants);
-        System.out.println("6666" + event);
         eventRepo.save(event);
     }
 
@@ -153,6 +137,5 @@ public class EventServiceImpl implements EventService{
         Event event = eventRepo.findById(eventId).orElseThrow(() -> new EntityNotFoundException(eventId));
         eventRepo.delete(event);
     }
-
 
 }

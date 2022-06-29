@@ -11,8 +11,6 @@ public interface EventService {
 
     EventResponseDTO createEvent(EventRequestDTO eventRequestDTO, String email);
 
-    EventResponseDTO updateEvent(String eventId, EventRequestDTO eventRequestDTO);
-
     Map<String, Object> getAllEvents(Integer pageNo, Integer pageSize);
 
     Map<String, Object> getUnapprovedEvents(Integer pageNo, Integer pageSize);
@@ -24,8 +22,6 @@ public interface EventService {
     List<EventResponseDTO> getAcceptedEventsByEmail(String email);
 
     List<EventResponseDTO> getRejectedEventsByEmail(String email);
-
-    EventResponseDTO getEvent(String eventId);
 
     void acceptEvent(Boolean accepted, String eventId);
 

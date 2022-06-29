@@ -46,9 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterAt(
-                mupaf,
-                UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAt(mupaf, UsernamePasswordAuthenticationFilter.class);
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/login").permitAll();
         http.authorizeRequests().antMatchers("/swagger-ui/**", "/licenta-openapi/**").permitAll();
         http.authorizeRequests().antMatchers("/api/login/**", "/api/register/**","/api/role/addtouser/**"
