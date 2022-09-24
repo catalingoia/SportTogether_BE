@@ -42,7 +42,7 @@ public class EventServiceImpl implements EventService{
     public Map<String, Object> getAllEvents(Integer pageNo, Integer pageSize) {
         Pageable paging = PageRequest.of(pageNo, pageSize);
         Map<String, Object> response = new HashMap<>();
-        Page<Event> events = eventRepo.findByAcceptedTrueOrRejectedTrue(paging);
+        Page<Event> events = eventRepo.findByAcceptedTrueOrRejectedTrueOrderByCreateTimestampDesc(paging);
         response.put("events",  eventMapper.eventListToEventResponseDTOList(events.getContent()));
         response.put("currentPage", events.getNumber());
         response.put("totalItems", events.getTotalElements());
@@ -54,7 +54,7 @@ public class EventServiceImpl implements EventService{
     public Map<String, Object> getUnapprovedEvents(Integer pageNo, Integer pageSize) {
         Pageable paging = PageRequest.of(pageNo, pageSize);
         Map<String, Object> response = new HashMap<>();
-        Page<Event> events = eventRepo.findByAcceptedFalseAndRejectedFalse(paging);
+        Page<Event> events = eventRepo.findByAcceptedFalseAndRejectedFalseOrderByCreateTimestampDesc(paging);
         response.put("events",  eventMapper.eventListToEventResponseDTOList(events.getContent()));
         response.put("currentPage", events.getNumber());
         response.put("totalItems", events.getTotalElements());
@@ -67,7 +67,7 @@ public class EventServiceImpl implements EventService{
     public Map<String, Object> getAcceptedEvents(Integer pageNo, Integer pageSize) {
         Pageable paging = PageRequest.of(pageNo, pageSize);
         Map<String, Object> response = new HashMap<>();
-        Page<Event> events = eventRepo.findByAcceptedTrue(paging);
+        Page<Event> events = eventRepo.findByAcceptedTrueOrderByCreateTimestampDesc(paging);
         response.put("events",  eventMapper.eventListToEventResponseDTOList(events.getContent()));
         response.put("currentPage", events.getNumber());
         response.put("totalItems", events.getTotalElements());

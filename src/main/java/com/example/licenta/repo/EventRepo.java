@@ -12,7 +12,7 @@ public interface EventRepo extends JpaRepository<Event, String> {
     List<Event> findByUserEmailAndAcceptedTrue(String email);
     List<Event> findByUserEmailAndRejectedTrue(String email);
     List<Event> findByUserEmail(String email);
-    Page<Event> findByAcceptedTrue(Pageable pageable);
-    Page<Event> findByAcceptedFalseAndRejectedFalse(Pageable pageable);
-    Page<Event> findByAcceptedTrueOrRejectedTrue(Pageable pageable);
+    Page<Event> findByAcceptedTrueOrderByCreateTimestampDesc(Pageable pageable);
+    Page<Event> findByAcceptedFalseAndRejectedFalseOrderByCreateTimestampDesc(Pageable pageable);
+    Page<Event> findByAcceptedTrueOrRejectedTrueOrderByCreateTimestampDesc(Pageable pageable);
 }

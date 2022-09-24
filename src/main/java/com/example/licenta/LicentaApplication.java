@@ -44,25 +44,27 @@ public class LicentaApplication {
 			userService.addRoleToUser("dragomir@gmail.com", "USER");
 
 			eventService.createEvent(new EventRequestDTO("Football", "Amateur", "0744393666","sonia@yahoo.com", 11, 12,
-			"Va astept in numar cat mai mare","Jun 10 2022","1:00 PM","Baza sportivă Unirea"), "sonia@yahoo.com");
+			"Va astept in numar cat mai mare","Jul 10 2022","1:00 PM","Baza sportivă Unirea"), "sonia@yahoo.com");
 			eventService.createEvent(new EventRequestDTO("Basketball", "Amateur", "0722334547","sonia@yahoo.com", 9, 0,
-					"Va astept in numar cat mai mare","Jun 11 2022","2:00 PM","Parcul Rozelor"), "sonia@yahoo.com");
+					"Va astept in numar cat mai mare","Jul 11 2022","2:00 PM","Parcul Rozelor"), "sonia@yahoo.com");
 			eventService.createEvent(new EventRequestDTO("Handball", "First time", "0745037061","sonia@yahoo.com", 11, 10,
 					"Va astept in numar cat mai mare","Jul 2 2022","11:00 AM","Parcul Babeș-Bolyai"), "sonia@yahoo.com");
+			eventService.createEvent(new EventRequestDTO("Bowling", "Amateur", "0745037061","sonia@yahoo.com", 3, 25,
+					"Nu aveti nevoie de niciun echipament","Jul 3 2022","4:00 PM","Multiplex Leul"), "sonia@yahoo.com");
 			eventService.createEvent(new EventRequestDTO("Rugby", "Professional", "0730071203","ursu@yahoo.com", 29, 0,
 					"Va astept in numar cat mai mare","Jul 5 2022","10:00 AM","Parcul Babeș-Bolyai"), "sonia@yahoo.com");
 			eventService.createEvent(new EventRequestDTO("Tennis", "Intermediate", "0722213210","sonia@yahoo.com", 1, 20,
-					"Am nevoie de un partener pentru un meci de Tenis. Trebuie sa ai racheta proprie","May 21 2022","6:00 PM","Baza sportivă Unirea"), "ursu@yahoo.com");
+					"Am nevoie de un partener pentru un meci de Tenis. Trebuie sa ai racheta proprie","Jul 21 2022","6:00 PM","Baza sportivă Unirea"), "ursu@yahoo.com");
 			eventService.createEvent(new EventRequestDTO("Football", "Intermediate", "0722640270","ursu@yahoo.com", 21, 13,
 					"Va astept in numar cat mai mare","Jul 24 2022","6:00 PM","Baza sportivă Gheorgheni"), "ursu@yahoo.com");
 			eventService.createEvent(new EventRequestDTO("Football", "First time", "0745153492","sonia@yahoo.com", 11, 5,
-					"Va astept in numar cat mai mare","Jun 30 2022","9:00 PM","Baza sportivă Gheorgheni"), "sonia@yahoo.com");
+					"Va astept in numar cat mai mare","Jul 29 2022","9:00 PM","Baza sportivă Gheorgheni"), "sonia@yahoo.com");
 			eventService.createEvent(new EventRequestDTO("Tennis", "Professional", "0745664688","moldo@gmail.com", 3, 25,
-					"Am rugamintea sa va aduceti echipamentele proprii, Va multumesc!","Jun 26 2022","4:00 PM","Baza sportivă Unirea"), "moldo@gmail.com");
+					"Am rugamintea sa va aduceti echipamentele proprii, Va multumesc!","Jun 30 2022","4:00 PM","Baza sportivă Unirea"), "moldo@gmail.com");
 			eventService.createEvent(new EventRequestDTO("Running", "Intermediate", "0743236323","dragomir@gmail.com", 1, 0,
 					"Caut un insotitor pentru un jogging de dimineata ","Jun 30 2022","8:00 AM","Parcul central"), "dragomir@gmail.com");
 			eventService.createEvent(new EventRequestDTO("Bowling", "First time", "0743533431","dragomir@gmail.com", 1, 20,
-					"Am nevoie de cineva care sa ma invete bowling. Suna-ma pentru mai multe detalii","Jun 28 2022","5:00 pM","Multiplex Leul"), "dragomir@gmail.com");
+					"Am nevoie de o persoana pentru un meci de bowling. Suna-ma pentru mai multe detalii","Jul 10 2022","5:00 PM","Multiplex Leul"), "dragomir@gmail.com");
 
 		};
 	}
